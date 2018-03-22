@@ -34,9 +34,9 @@ class GamesController < ApplicationController
         count_elements = count_elements + 1
       end
 
-      puts '0000000000000000000000 INSTANT GAMING RESULT 00000000000000000000000000000000000'
-      puts instant_game_array
-      puts '00000000000000000000000000 END INSTANT GAMING RESULT 0000000000000000000000000000000'
+      # puts '0000000000000000000000 INSTANT GAMING RESULT 00000000000000000000000000000000000'
+      # puts instant_game_array
+      # puts '00000000000000000000000000 END INSTANT GAMING RESULT 0000000000000000000000000000000'
 
     #KINGUIN SEARCH
       kinguin_page = mechanize.get('https://www.kinguin.net')
@@ -63,16 +63,17 @@ class GamesController < ApplicationController
         game_link_h4 = game_link_container.at('h4')
         game_link = game_link_h4.at('a')["href"]
 
-        game_image_container = game.at('.flag')
-        game_image = game_image_container.at('img')["src"]
+        game_image_container = game.at('.main-image')
+        game_image_array = game_image_container.search('img')[1]
+        game_image = game_image_array['src']
 
         hash =  {price:game_price,name:game_name,platform:game_platform.remove('Platform: '),link:game_link,image:game_image}
         kinguin_games_array << hash
       end
 
-      puts '0000000000000000000000 KINGUIN RESULT 00000000000000000000000000000000000'
-      puts kinguin_games_array
-      puts '00000000000000000000000000 END KINGUIN RESULT 0000000000000000000000000000000'
+      # puts '0000000000000000000000 KINGUIN RESULT 00000000000000000000000000000000000'
+      # puts kinguin_games_array
+      # puts '00000000000000000000000000 END KINGUIN RESULT 0000000000000000000000000000000'
 
     #G2A SEARCH
       g2a_page = mechanize.get('https://www.g2a.com/')
@@ -90,7 +91,7 @@ class GamesController < ApplicationController
         game_name = game.at('.Card__title').text.strip
 
         game_link_container = game.at('.Card__media')
-        game_link = game_link_container.at('a')['href']
+        game_link = 'https://www.g2a.com' + game_link_container.at('a')['href']
 
         game_image = game.at('.Card__img.Card__img--placeholder')['src']
 
@@ -99,8 +100,25 @@ class GamesController < ApplicationController
 
       end
 
+      # puts '0000000000000000000000 G2A RESULT 00000000000000000000000000000000000'
+      # puts g2a_games_array
+      # puts '00000000000000000000000000 END G2A RESULT 0000000000000000000000000000000'
+
+      @sites_array = []
+
+      instant_game_array.each do |instant|
+        @sites_array << instant
+        kinguin_games_array.each do |kinguin|
+          @sites_array << kinguin
+          g2a_games_array.each do |g2a|
+            @sites_array << g2a
+          end
+        end
+      end
+
+
       puts '0000000000000000000000 G2A RESULT 00000000000000000000000000000000000'
-      puts g2a_games_array
+      puts @sites_array
       puts '00000000000000000000000000 END G2A RESULT 0000000000000000000000000000000'
 
     end
