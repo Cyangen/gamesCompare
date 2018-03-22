@@ -1,35 +1,134 @@
-<p id="notice"><%= notice %></p>
+<nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="<%= root_path %>" class="brand-logo">GamesCompare!</a>
+    <ul class="right hide-on-med-and-down">
+    </ul>
 
-<h1>Games</h1>
+    <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
+    </ul>
+  </div>
+</nav>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Search</th>
-      <th>Kinguinprice</th>
-      <th>Instantgamingprice</th>
-      <th>G2aprice</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center orange-text">
+      <% if params[:game_search] %>
+        Hai cercato <%= params[:game_search].capitalize %>
+      <% else %>
+        GamesCompare
+      <% end %>
+    </h1>
+    <div class="row center">
+      <h5 class="header col s12 light">Compara videogiochi</h5>
+    </div>
+    <div class="row center">
+      <div class="input-field col s12">
+        <%= form_tag(games_path, method: :get) do %>
+          <%= text_field_tag :game_search, params[:game_search], class: 'validate center-align search-input', placeholder:'cerca un gioco' %>
+        <% end %>
+      </div>
+    </div>
+    <br><br>
+  </div>
+</div>
 
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <td><%= game.name %></td>
-        <td><%= game.search %></td>
-        <td><%= game.kinguinPrice %></td>
-        <td><%= game.instantGamingPrice %></td>
-        <td><%= game.g2aPrice %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
 
-<br>
+    <h5 class="header col s12 m4 l4 light center-align">INSTANT GAMING</h5>
+    <h5 class="header col s12 m4 l4 light center-align">KINGUIN</h5>
+    <h5 class="header col s12 m4 l4 light center-align">G2A</h5>
 
-<%= link_to 'New Game', new_game_path %>
+    <div class="col s12 m4 l4">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p class="truncate"><b></b></p>
+            <br>
+            <p></p>
+          </div>
+          <div class="card-action">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m4 l4">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p class="truncate"><b></b></p>
+            <br>
+            <p></p>
+          </div>
+          <div class="card-action">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m4 l4">
+      <div class="card horizontal">
+        <div class="card-image">
+          <img src="">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p class="truncate"><b></b></p>
+            <br>
+            <p></p>
+          </div>
+          <div class="card-action">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <br><br>
+</div>
+
+<footer class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Company Bio</h5>
+        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+      </div>
+      <!--<div class="col l3 s12">-->
+      <!--<h5 class="white-text">Settings</h5>-->
+      <!--<ul>-->
+      <!--<li><a class="white-text" href="#!">Link 1</a></li>-->
+      <!--<li><a class="white-text" href="#!">Link 2</a></li>-->
+      <!--<li><a class="white-text" href="#!">Link 3</a></li>-->
+      <!--<li><a class="white-text" href="#!">Link 4</a></li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <div class="col l3 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Link 1</a></li>
+          <li><a class="white-text" href="#!">Link 2</a></li>
+          <li><a class="white-text" href="#!">Link 3</a></li>
+          <li><a class="white-text" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Creato da Demone Scimmia 8
+    </div>
+  </div>
+</footer>
+
+
+<!--  Scripts-->
+<div class="hiddendiv common"></div><div class="drag-target" data-sidenav="nav-mobile" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>

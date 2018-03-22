@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri', '~> 1.6', '>= 1.6.8'
 gem 'mechanize', '~> 2.7', '>= 2.7.4'
+gem 'similar_text', '~> 0.0.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
