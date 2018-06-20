@@ -33,35 +33,80 @@
 </div>
 
 <div class="container">
-  <div class="row">
 
-    <h5 class="header col s12 m4 l4 light center-align">INSTANT GAMING</h5>
-    <h5 class="header col s12 m4 l4 light center-align">KINGUIN</h5>
-    <h5 class="header col s12 m4 l4 light center-align">G2A</h5>
-
-    <% @sites_array.each do |game| %>
-      <div class="col s12 m4 l4">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img style="width: 100px;height: 190px" src="<%= game[:image] %>">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p class="truncate"><b><%= game[:name] %></b></p>
-              <br>
-              <p>prezzo: <%= game[:price] %></p>
-              <p>piattaforma: <%= game[:platform] %></p>
+  <% if params[:game_search] %>
+    <div class="row">
+      <h5 class="header col s12 m12 l12 light center-align orange-text">INSTANT GAMING</h5>
+      <% @instant_game_array.each do |game| %>
+        <div class="col s12 m6 l6">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img style="max-width: 100px;max-height: 190px" src="<%= game[:image] %>">
             </div>
-            <div class="card-action">
-              <a href="<%= game[:link] %>">Vai al gioco</a>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p class="truncate"><b><%= game[:name] %></b></p>
+                <br>
+                <p>prezzo: <%= game[:price] %></p>
+                <p>piattaforma: <%= game[:platform] %></p>
+              </div>
+              <div class="card-action">
+                <a target="_blank" href="<%= game[:link] %>">Vai al gioco</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-
-  </div>
-  <br><br>
+      <% end %>
+    </div>
+    <br><br>
+    <div class="row">
+      <h5 class="header col s12 m12 l12 light center-align orange-text">KINGUIN</h5>
+      <% @kinguin_games_array.each do |game| %>
+        <div class="col s12 m6 l6">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img style="max-width: 100px;max-height: 190px" src="<%= game[:image] %>">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p class="truncate"><b><%= game[:name] %></b></p>
+                <br>
+                <p>prezzo: <%= game[:price] %></p>
+                <p>piattaforma: <%= game[:platform] %></p>
+              </div>
+              <div class="card-action">
+                <a target="_blank" href="<%= game[:link] %>">Vai al gioco</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br><br>
+    <div class="row">
+      <h5 class="header col s12 m12 l12 light center-align orange-text">G2A</h5>
+      <% @g2a_games_array.each do |game| %>
+        <div class="col s12 m6 l6">
+          <div class="card horizontal">
+            <div class="card-image">
+              <img style="max-width: 100px;max-height: 190px" src="<%= game[:image] %>">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p class="truncate"><b><%= game[:name] %></b></p>
+                <br>
+                <p>prezzo: <%= game[:price] %></p>
+                <p>piattaforma: <%= game[:platform] %></p>
+              </div>
+              <div class="card-action">
+                <a target="_blank" href="<%= game[:link] %>">Vai al gioco</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <footer class="page-footer orange">

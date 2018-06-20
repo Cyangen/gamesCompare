@@ -18,7 +18,7 @@ class GamesController < ApplicationController
       games = results.search('.item')
 
       count_elements = 0
-      instant_game_array = []
+      @instant_game_array = []
 
       games.each do |game|
 
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
         game_image = game.at('.picture.mainshadow')["src"]
 
         hash =  {price:game_price,name:game_name,platform:game_platform,link:game_link,image:game_image}
-        instant_game_array << hash
+        @instant_game_array << hash
 
         count_elements = count_elements + 1
       end
@@ -45,16 +45,20 @@ class GamesController < ApplicationController
       kinguin_page = search_input.submit
 
       results = kinguin_page.at('.cat-v1')
-      offer_details = results.at('#offerDetails')
+      # offer_details = results.at('#offerDetails')
 
-      games = offer_details.search('.category')
+      games = results.search('.category')
 
-      kinguin_games_array = []
+      @kinguin_games_array = []
 
       games.each do |game|
 
+        if game.at('.actual-price')
         game_price = game.at('.actual-price').text.strip
         game_name = game.at('.product-name').text.strip
+        else
+          next
+        end
 
         game_platform_container = game.at('.properties')
         game_platform = game_platform_container.at('div')['title']
@@ -64,11 +68,11 @@ class GamesController < ApplicationController
         game_link = game_link_h4.at('a')["href"]
 
         game_image_container = game.at('.main-image')
-        game_image_array = game_image_container.search('img')[1]
+        game_image_array = game_image_container.search('img')[0]
         game_image = game_image_array['src']
 
         hash =  {price:game_price,name:game_name,platform:game_platform.remove('Platform: '),link:game_link,image:game_image}
-        kinguin_games_array << hash
+        @kinguin_games_array << hash
       end
 
       # puts '0000000000000000000000 KINGUIN RESULT 00000000000000000000000000000000000'
@@ -84,7 +88,7 @@ class GamesController < ApplicationController
       results = g2a_page.at('.products-grid')
       games = results.search('li')
 
-      g2a_games_array = []
+      @g2a_games_array = []
 
       games.each do |game|
         game_price = game.at('.Card__price').text.strip
@@ -96,7 +100,7 @@ class GamesController < ApplicationController
         game_image = game.at('.Card__img.Card__img--placeholder')['src']
 
         hash =  {price:game_price,name:game_name,platform:nil,link:game_link,image:game_image}
-        g2a_games_array << hash
+        @g2a_games_array << hash
 
       end
 
@@ -104,22 +108,21 @@ class GamesController < ApplicationController
       # puts g2a_games_array
       # puts '00000000000000000000000000 END G2A RESULT 0000000000000000000000000000000'
 
-      @sites_array = []
+      # @sites_array = []
+      #
+      # instant_game_array.each do |instant|
+      #   @sites_array << instant
+      #   kinguin_games_array.each do |kinguin|
+      #     @sites_array << kinguin
+      #     g2a_games_array.each do |g2a|
+      #       @sites_array << g2a
+      #     end
+      #   end
+      # end
 
-      instant_game_array.each do |instant|
-        @sites_array << instant
-        kinguin_games_array.each do |kinguin|
-          @sites_array << kinguin
-          g2a_games_array.each do |g2a|
-            @sites_array << g2a
-          end
-        end
-      end
-
-
-      puts '0000000000000000000000 G2A RESULT 00000000000000000000000000000000000'
-      puts @sites_array
-      puts '00000000000000000000000000 END G2A RESULT 0000000000000000000000000000000'
+      # puts '0000000000000000000000 G2A RESULT 00000000000000000000000000000000000'
+      # puts @sites_array
+      # puts '00000000000000000000000000 END G2A RESULT 0000000000000000000000000000000'
 
     end
 
